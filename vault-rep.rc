@@ -1,0 +1,18 @@
+#set functions for all clusters
+VRD_ADDR="http://127.0.0.1"
+PRI_PORT="8200"
+PR_PORT="7200"
+DR1_PORT="9200"
+DR2_PORT="5200"
+
+TOKEN1=$(cat PRI/root_token-vault_2)
+TOKEN2=$(cat PR/root_token-vault_2)
+TOKEN3=$(cat DR1/root_token-vault_2)
+TOKEN4=$(cat DR2/root_token-vault_2)
+
+function vaultpri { VAULT_TOKEN=$TOKEN1 VAULT_SKIP_VERIFY=true VAULT_ADDR=$VRD_ADDR:$PRI_PORT vault $@ ;} ; alias v1='vaultpri'
+function vault1 { VAULT_TOKEN=$TOKEN1 VAULT_SKIP_VERIFY=true VAULT_ADDR=$VRD_ADDR:$PRI_PORT vault $@ ;}
+function vaultdr1 { VAULT_TOKEN=$TOKEN3 VAULT_SKIP_VERIFY=true VAULT_ADDR=$VRD_ADDR:$DR1_PORT vault $@ ;} ; alias vdr1='vaultdr1'
+function vaultpr { VAULT_TOKEN=$TOKEN2 VAULT_SKIP_VERIFY=true VAULT_ADDR=$VRD_ADDR:$PR_PORT vault $@ ;} ; alias v3='vaultpr'
+function vault2 { VAULT_TOKEN=$TOKEN2 VAULT_SKIP_VERIFY=true VAULT_ADDR=$VRD_ADDR:$PR_PORT vault $@ ;} ; alias v2='vault2'
+function vaultdr2 { VAULT_TOKEN=$TOKEN4 VAULT_SKIP_VERIFY=true VAULT_ADDR=$VRD_ADDR:$DR2_PORT vault $@ ;} ; alias v4='vaultdr2'
